@@ -1,0 +1,2 @@
+packaging>=21.3
+sacrebleu>=2.0.0

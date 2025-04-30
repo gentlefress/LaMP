@@ -1,4 +1,4 @@
-# LaMP: Language-Motion Pretraining for Motion Generation, Retrieval, and Captioning (ICLR 2025)
+# :bulb: LaMP: Language-Motion Pretraining for Motion Generation, Retrieval, and Captioning (ICLR 2025)
 ### [[Project Page]](https://aigc3d.github.io/LaMP/) [[Paper]](https://arxiv.org/abs/2410.07093)
 ![teaser_image](https://github.com/gentlefress/LaMP/blob/main/teaser.png)
 
@@ -126,7 +126,7 @@ We use this [scene](https://drive.google.com/file/d/1lg62nugD7RTAIz0Q_YP2iZsxpUz
 
 </details>
 
-## :space_invader: Train Your Own Models
+## :flashlight: Train Your Own Models
 <details>
 
 
@@ -154,7 +154,7 @@ python train_t2m_transformer.py --name mtrans_name --gpu_id 2 --dataset_name t2m
 All the pre-trained models and intermediate results will be saved in space `./checkpoints/<dataset_name>/<name>`.
 </details>
 
-## :book: Evaluation
+## :artist: Evaluation
 <details>
 
 ### Evaluate VQ-VAE Reconstruction:

@@ -54,18 +54,6 @@ def plot_t2m(data, save_dir, captions, m_lengths):
 def load_vq_model():
     opt_path = pjoin(opt.checkpoints_dir, opt.dataset_name, opt.vq_name, 'opt.txt')
     vq_opt = get_opt(opt_path, opt.device)
-    # vq_model = RVQVAE(vq_opt,
-    #             dim_pose,
-    #             vq_opt.nb_code,
-    #             vq_opt.code_dim,
-    #             vq_opt.output_emb_width,
-    #             vq_opt.down_t,
-    #             vq_opt.stride_t,
-    #             vq_opt.width,
-    #             vq_opt.depth,
-    #             vq_opt.dilation_growth_rate,
-    #             vq_opt.vq_act,
-    #             vq_opt.vq_norm)
     vq_model = vqvae.HumanVQVAE(vq_opt, ## use args to define different parameters in different quantizers
                         vq_opt.nb_code,
                         vq_opt.code_dim,
@@ -77,9 +65,8 @@ def load_vq_model():
                         vq_opt.dilation_growth_rate,
                         vq_opt.vq_act,
                         vq_opt.vq_norm)
-    # ckpt = torch.load(pjoin(vq_opt.checkpoints_dir, vq_opt.dataset_name, vq_opt.name, 'model', 'net_best_fid.pth'),
-    #                         map_location='cpu')
-    ckpt = torch.load("/mnt/cap/karong/t2m/pretrained/net_last.pth", map_location='cpu')
+    ckpt = torch.load(pjoin(vq_opt.checkpoints_dir, vq_opt.dataset_name, vq_opt.name, 'model', 'net_best_fid.pth'),
+                            map_location='cpu')
     model_key = 'vq_model' if 'vq_model' in ckpt else 'net'
     vq_model.load_state_dict(ckpt[model_key])
     print(f'Loading VQ Model {opt.vq_name}')
@@ -95,21 +82,16 @@ if __name__ == '__main__':
 
     opt.save_root = pjoin(opt.checkpoints_dir, opt.dataset_name, opt.name)
     opt.model_dir = pjoin(opt.save_root, 'model')
-    # opt.meta_dir = pjoin(opt.save_root, 'meta')
     opt.eval_dir = pjoin(opt.save_root, 'animation')
-    opt.log_dir = pjoin('/mnt/cap/karong/t2m/momask-codes/log/qformer/', opt.dataset_name, opt.name)
-    # opt.log_dir = pjoin('./log/qformer/', opt.dataset_name, opt.name)
+    opt.log_dir = pjoin('./log/lamp/', opt.dataset_name, opt.name)
 
     os.makedirs(opt.model_dir, exist_ok=True)
-    # os.makedirs(opt.meta_dir, exist_ok=True)
     os.makedirs(opt.eval_dir, exist_ok=True)
     os.makedirs(opt.log_dir, exist_ok=True)
 
     if opt.dataset_name == 't2m':
         opt.data_root = './dataset/HumanML3D'
         opt.motion_dir = pjoin(opt.data_root, 'new_joint_vecs')
-        # opt.data_root = '/mnt/cap/karong/t2m/momask-codes/dataset/unimocap/UniMocap'
-        # opt.motion_dir = pjoin(opt.data_root, 'new_joints_vecs')
         opt.joints_num = 22
         opt.max_motion_len = 55
         dim_pose = 263
@@ -135,9 +117,6 @@ if __name__ == '__main__':
     opt.text_dir = pjoin(opt.data_root, 'texts')
 
     vq_model, vq_opt = load_vq_model()
-
-    # clip_version = 'ViT-B/32'
-
     opt.num_tokens = vq_opt.nb_code
     motion_qformer = Motion_QFormer(
         vq_opt,
@@ -145,23 +124,11 @@ if __name__ == '__main__':
         motion_model="motion_encoder",
         freeze_motion_encoder=True,
         num_query_token=49,
-        # num_query_token=34,
         cross_attention_freq=2,
         embed_dim=512,
-        # embed_dim=256,
         max_txt_len=32,
         ckpt_special_strs=None,
     )
-    # checkpoint = torch.load('bert/blip2_pretrained.pth', map_location="cpu")
-    # state_dict = checkpoint['model']
-    # model_state_dict = motion_qformer.state_dict()
-    # if 'vision_proj.weight' in state_dict: # this is for stage1.
-    #     state_dict['motion_proj.weight'] = state_dict.pop('vision_proj.weight')
-    #     state_dict['motion_proj.bias'] = state_dict.pop('vision_proj.bias')
-    # filtered_state_dict = check_model_checkpoint_consistency(model_state_dict, state_dict, special_strs=['motion_encoder',
-    #                                                         'motion_projection', 'motion_mlp'])
-    # del filtered_state_dict['query_tokens']
-    # motion_qformer.load_state_dict(filtered_state_dict, strict=False)
     all_params = 0
     pc_transformer = sum(param.numel() for param in motion_qformer.parameters_wo_clip())
 
@@ -175,10 +142,6 @@ if __name__ == '__main__':
     std = np.load(pjoin(opt.checkpoints_dir, opt.dataset_name, opt.vq_name, 'meta', 'std.npy'))
     train_split_file = pjoin(opt.data_root, 'train.txt')
     val_split_file = pjoin(opt.data_root, 'val.txt')
-    # mean = np.load('/mnt/cap/karong/t2m/momask-codes/dataset/unimocap/UniMocap/Mean.npy')
-    # std = np.load('/mnt/cap/karong/t2m/momask-codes/dataset/unimocap/UniMocap/Std.npy')
-    # train_split_file = '/mnt/cap/karong/t2m/momask-codes/dataset/unimocap/UniMocap/train.txt'
-    # val_split_file = '/mnt/cap/karong/t2m/momask-codes/dataset/unimocap/UniMocap/val.txt'
 
     train_dataset = Text2MotionDataset(opt, mean, std, train_split_file)
     val_dataset = Text2MotionDataset(opt, mean, std, val_split_file)

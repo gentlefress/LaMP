@@ -119,11 +119,6 @@ Following these steps:
 
 We didn't tried other retargetting tools. Welcome to comment if you find others are more useful.
 
-### Scene
-
-We use this [scene](https://drive.google.com/file/d/1lg62nugD7RTAIz0Q_YP2iZsxpUzzOkT1/view?usp=sharing) for animation.
-
-
 </details>
 
 ## :flashlight: Train Your Own Models
@@ -136,6 +131,11 @@ We use this [scene](https://drive.google.com/file/d/1lg62nugD7RTAIz0Q_YP2iZsxpUz
 You may also need to download evaluation models to run the scripts.
 ```
 python train_vq.py --name vq_name --gpu_id 1 --dataset_name t2m --batch_size 256  --max_epoch 50 --quantize_dropout_prob 0.2 --gamma 0.05
+```
+
+### Train LaMP
+```
+python train_lamp.py --name lamp_name --gpu_id 2 --dataset_name t2m --batch_size 64 --vq_name vq_name
 ```
 
 ### Train Masked Transformer
@@ -152,6 +152,12 @@ python train_t2m_transformer.py --name mtrans_name --gpu_id 2 --dataset_name t2m
 * `--cond_drop_prob`: condition drop ratio, for classifier-free guidance. `0.2` is used.
 
 All the pre-trained models and intermediate results will be saved in space `./checkpoints/<dataset_name>/<name>`.
+
+### Train M2T
+```
+Coming soon....
+```
+
 </details>
 
 ## :artist: Evaluation
@@ -196,7 +202,7 @@ We sincerely thank the open-sourcing of these works where our code is based on:
 [T2M-GPT](https://github.com/Mael-zys/T2M-GPT) and [MoMask](https://github.com/EricGuo5513/momask-codes/tree/main).
 
 ## License
-This code is distributed under an [MIT LICENSE](https://github.com/EricGuo5513/momask-codes/tree/main?tab=MIT-1-ov-file#readme).
+This code is distributed under an [MIT LICENSE](https://github.com/gentlefress/LaMP/blob/main/LICENSE.md).
 
 Note that our code depends on other libraries, including SMPL, SMPL-X, PyTorch3D, and uses datasets which each have their own respective licenses that must also be followed.
 

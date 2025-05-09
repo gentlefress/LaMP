@@ -125,7 +125,7 @@ We didn't tried other retargetting tools. Welcome to comment if you find others 
 <details>
 
 
-**Note**: You have to train RVQ **BEFORE** training masked/residual transformers. The latter two can be trained simultaneously.
+**Note**: You have to train VQ-VAE **BEFORE** training masked/residual transformers. The latter two can be trained simultaneously.
 
 ### Train VQ-VAE
 You may also need to download evaluation models to run the scripts.
@@ -146,9 +146,9 @@ python train_t2m_transformer.py --name mtrans_name --gpu_id 2 --dataset_name t2m
 * `--dataset_name`: motion dataset, `t2m` for HumanML3D and `kit` for KIT-ML.  
 * `--name`: name your model. This will create to model space as `./checkpoints/<dataset_name>/<name>`
 * `--gpu_id`: GPU id.
-* `--batch_size`: we use `512` for rvq training. For masked/residual transformer, we use `64` on HumanML3D and `16` for KIT-ML.
+* `--batch_size`: we use `512` for vq training. For masked/residual transformer, we use `64` on HumanML3D and `16` for KIT-ML.
 * `--quantize_drop_prob`: quantization dropout ratio, `0.2` is used.
-* `--vq_name`: when training masked/residual transformer, you need to specify the name of rvq model for tokenization.
+* `--vq_name`: when training masked/residual transformer, you need to specify the name of vq model for tokenization.
 * `--cond_drop_prob`: condition drop ratio, for classifier-free guidance. `0.2` is used.
 
 All the pre-trained models and intermediate results will be saved in space `./checkpoints/<dataset_name>/<name>`.

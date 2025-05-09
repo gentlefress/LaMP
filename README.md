@@ -15,7 +15,7 @@ If you find our code or paper helpful, please consider starring our repository a
 ## :postbox: News
 📢 **2025-01-22** --- 🔥🔥🔥 Congrats! LaMP is accepted to ICLR 2025.
 
-📢 **2025-4-28** --- Release codes and models for momask. Including training/eval/generation scripts.
+📢 **2025-4-28** --- Release codes and models for LaMP. Including training/eval/generation scripts.
 
 📢 **2025-4-28** --- Initialized the webpage and git project.  
 

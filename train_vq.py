@@ -8,7 +8,7 @@ from options.vq_option import arg_parse
 from data.t2m_dataset import MotionDataset
 from utils import paramUtil
 import numpy as np
-
+from models.vq.vq_trainer import VQTokenizerTrainer
 from models.t2m_eval_wrapper import EvaluatorModelWrapper
 from utils.get_opt import get_opt
 from motion_loaders.dataset_motion_loader import get_dataset_motion_loader

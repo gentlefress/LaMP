@@ -5,7 +5,7 @@ import numpy as np
 from torch.utils.data import DataLoader
 from os.path import join as pjoin
 
-from models.lamp.motiongpm_lamp import Motion_QFormer
+from models.lamp.motiongpm_lamp import LaMP
 from models.lamp.lamp_trainer import MotionQFormerTrainer
 import models.vq.vqvae as vqvae
 from options.lamp_option import TrainT2MOptions

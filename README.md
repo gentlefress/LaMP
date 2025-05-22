@@ -46,11 +46,18 @@ bash prepare/download_evaluator.sh
 bash prepare/download_glove.sh
 ```
 
-#### Troubleshooting
-To address the download error related to gdown: "Cannot retrieve the public link of the file. You may need to change the permission to 'Anyone with the link', or have had many accesses". A potential solution is to run `pip install --upgrade --no-cache-dir gdown`, as suggested on https://github.com/wkentaro/gdown/issues/43. This should help resolve the issue.
 
 #### (Optional) Download Manually
-Coming Soon....
+##### VQVAE Pretrained Weights:
+https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/aigc3d/lamp/vq.tar
+##### LaMP Pretrained Weights:
+HumanML3D: https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/aigc3d/lamp/h3d-qformer.tar
+
+KIT-ML: https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/aigc3d/lamp/kit-qformer.tar
+##### LaMP-T2M Pretrained Weights:
+https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/aigc3d/lamp/t2m.tar
+##### M2T-LaMP Pretrained Weights:
+https://virutalbuy-public.oss-cn-hangzhou.aliyuncs.com/share/aigc3d/lamp/m2t.pth
 ### 3. Get Data
 
 You have two options here:
@@ -155,7 +162,7 @@ All the pre-trained models and intermediate results will be saved in space `./ch
 
 ### Train M2T
 ```
-Coming soon....
+python train_m2t.py --exp-name M2T --num-layers 12 --batch-size 80 --embed-dim-gpt 1024 --nb-code 512 --n-head-gpt 16 --block-size 51 --ff-rate 4 --drop-out-rate 0.1 --resume-pth your_own_vqvae --vq-name VQVAE --out-dir ./output --total-iter 150000 --lr-scheduler 75000 --lr 0.00005 --dataname kit --down-t 2 --depth 3 --quantizer ema_reset --eval-iter 10000 --pkeep 0.5 --dilation-growth-rate 3 --vq-act relu
 ```
 
 </details>
@@ -174,7 +181,7 @@ KIT-ML:
 python eval_t2m_vq.py --gpu_id 0 --name  --dataset_name kit
 ```
 
-### Evaluate Text2motion Generation:
+### Evaluate LaMP-T2M:
 HumanML3D:
 ```
 python eval_t2m_trans_res.py --res_name mtrans_name --dataset_name t2m --name eval_name --gpu_id 1 --cond_scale 4 --time_steps 10 --ext evaluation
@@ -192,6 +199,12 @@ python eval_t2m_trans_res.py --res_name mtrans_name_k --dataset_name kit --name 
 * `--which_epoch`: checkpoint name of `masked transformer`.
 
 The final evaluation results will be saved in `./checkpoints/<dataset_name>/<name>/eval/<ext>.log`
+
+### Evaluate LaMP-M2T:
+```
+python M2T_eval.py --exp-name Test_M2T --num-layers 9 --batch-size 1 --embed-dim-gpt 1024 --nb-code 512 --n-head-gpt 16 --block-size 51 --ff-rate 4 --drop-out-rate 0.1 --resume-pth your_own_vqvae --vq-name VQVAE --out-dir ./output --total-iter 150000 --lr-scheduler 75000 --lr 0.0001 --dataname t2m --down-t 2 --depth 3 --quantizer ema_reset --eval-iter 10000 --pkeep 0.5 --dilation-growth-rate 3 --vq-act relu --resume-trans your_own_m2t
+```
+LaMP-BertScore metric is computed by first generating a textual description of the synthesized motion using LaMP-M2T, and then calculating the BertScore between the generated description and the ground-truth text.
 
 </details>
 

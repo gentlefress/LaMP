@@ -1,3 +1,34 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=gentlefress&project=LaMP&lang=id">Bahasa Indonesia</a>
+      </div>
+    </div>
+  </details>
+</div>
+
 # :bulb: LaMP: Language-Motion Pretraining for Motion Generation, Retrieval, and Captioning (ICLR 2025)
 ### [[Project Page]](https://aigc3d.github.io/LaMP/) [[Paper]](https://arxiv.org/abs/2410.07093)
 ![teaser_image](https://github.com/gentlefress/LaMP/blob/main/teaser.png)

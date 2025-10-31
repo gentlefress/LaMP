@@ -55,13 +55,6 @@ class PositionalEncoding(nn.Module):
         x = x + self.pe[:x.shape[0], :]
         return self.dropout(x)
 class LaMP(QFormer_Base):
-    """
-    GPT4Point first-stage model with Q-former and Point Encoder.
-    """
-
-    PRETRAINED_MODEL_CONFIG_DICT = {
-        "pretrain": "configs/models/gpt4point/gpt4point_stage1.yaml",
-    }
 
     def __init__(
         self,
